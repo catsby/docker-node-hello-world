@@ -15,13 +15,13 @@ phases:
       #Generate the VARS here.  Go ahead and change the $GIT_HASH Variable to whatever you want.  We'll figure out the details later
       #Also run your docker build command here
       - docker build -t $IMAGE_REPO_NAME .
-        #- docker tag $IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$GIT_HASH
+      - docker tag $IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$TAG_NAME
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image ...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$TAG_NAME
       #Here generate something I can use to create a docker container.  I was generating an environment.json but that's not necessary.
       #- aws sns publish --topic-arn $POST_BUILD_SNS --message file://.deployment/environment.json
         
