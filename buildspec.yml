@@ -7,6 +7,7 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
       - echo Installing dependencies
       - pip install docker-compose
+      - cat test.txt
   
   build:
     commands:
